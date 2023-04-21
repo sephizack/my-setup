@@ -13,18 +13,23 @@ unsetopt correct_all
 
 alias editrc="vim ~/.zshrc && source ~/.zshrc"
 alias srcrc="source ~/.zshrc"
+
+# Git Aliases
 alias gpl="git pull"
 alias gplo="git pull origin"
+alias gplsub="git submodule update --recursive --remote"
 alias gpu="git push"
-alias gs="git status"
-alias gsu="git status -uno"
+alias gs="git --no-pager status"
+alias gsu="git --no-pager status -uno"
 alias gl="git log --decorate --graph --pretty"
 alias gca="git add -u && git commit"
 alias gch="git checkout"
 alias gdf="git diff"
 alias gcl="git clone --recursive"
-alias gba="git branch -a"
-alias gcamend="git commit -a --amend"
+alias gba="git --no-pager branch -a"
+alias gsubmodulereset="git submodule deinit --all -f && git submodule update --init --recursive"
+alias gcamend="git add -u && git commit --amend"
+
 
 alias ll="ls -G -a -l"
 alias ..="cd .."
