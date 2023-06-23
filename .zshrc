@@ -29,7 +29,14 @@ alias gcl="git clone --recursive"
 alias gba="git --no-pager branch -a"
 alias gsubmodulereset="git submodule deinit --all -f && git submodule update --init --recursive"
 alias gcamend="git add -u && git commit --amend"
-
+function gforksync() {
+    git remote -v | grep fetch | head -1 | python3 -c '\
+        import sys; \
+        repo_path = sys.stdin.read().strip().split("/")[-2:]; \
+        repo_path[-1] = repo_path[-1].split(".git")[0]; \
+        print("Open URL: https://rndwww.nce.amadeus.net/git/plugins/servlet/sync/"+"/".join(repo_path)) \
+    '
+}
 
 alias ll="ls -G -a -l"
 alias ..="cd .."
