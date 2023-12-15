@@ -1,0 +1,42 @@
+version: "3.9"
+
+services:
+    ambient_mongo_db:
+      image: mongo
+      restart: always
+      networks:
+        - ambient-net
+      ports:
+        - "27017:27017"
+      environment:
+        MONGO_INITDB_DATABASE: ambientgateway
+        MONGO_INITDB_ROOT_USERNAME: root
+        MONGO_INITDB_ROOT_PASSWORD: coucou
+      volumes:
+       - ambientmongodata:/data/db
+
+    ambient_mongo_ui:
+      image: mongo-express
+      depends_on:
+        - ambient_mongo_db
+      restart: always
+      networks:
+        - ambient-net
+      ports:
+        - "8081:8081"
+      environment:
+        ME_CONFIG_MONGODB_AUTH_USERNAME: root
+        ME_CONFIG_MONGODB_ADMINUSERNAME: root
+        ME_CONFIG_MONGODB_ADMINPASSWORD: coucou
+        ME_CONFIG_MONGODB_AUTH_PASSWORD: coucou
+        ME_CONFIG_MONGODB_SERVER: ambient_mongo_db
+
+networks:
+    ambient-net:
+      driver: bridge
+      ipam:
+        config:
+          - subnet: 172.16.57.0/24
+
+volumes:
+    ambientmongodata:

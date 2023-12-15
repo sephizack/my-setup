@@ -26,7 +26,8 @@ alias gca="git add -u && git commit"
 alias gch="git checkout"
 alias gdf="git diff"
 alias gcl="git clone --recursive"
-alias gba="git --no-pager branch -a"
+alias gba="git --no-pager branch"
+alias gbaa="git --no-pager branch -a"
 alias gsubmodulereset="git submodule deinit --all -f && git submodule update --init --recursive"
 alias gcamend="git add -u && git commit --amend"
 function gforksync() {
@@ -40,6 +41,11 @@ function gforksync() {
 
 alias ll="ls -G -a -l"
 alias ..="cd .."
+function cdtmp() {
+    tdir=$( mktemp -d )
+    cd "$tdir"
+    echo "Moved to temp dir $tdir"
+}
 
 # Need a tweak in arch for home and end keys to work properly
 # (as well as insert, delete, pageup, pagedown, perhaps others...)
